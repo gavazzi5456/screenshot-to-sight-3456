@@ -8,11 +8,31 @@
 // hosting already compresses at the edge.
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import type { ConfigEnv } from "vite";
 
-export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-  },
-});
+export default (env: ConfigEnv) => {
+  const isPages = env.mode === "pages";
+  const base = isPages ? "/screenshot-to-sight-3456/" : "/";
+
+  return defineConfig({
+    vite: { base },
+    ...(isPages ? { nitro: false as const, envDefine: false } : {}),
+    tanstackStart: {
+      ...(isPages
+        ? {
+            router: { basepath: base },
+            prerender: {
+              enabled: true,
+              failOnError: true,
+              autoSubfolderIndex: true,
+              crawlLinks: false,
+            },
+            sitemap: { enabled: false },
+          }
+        : {}),
+      // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+      // nitro/vite builds from this
+      server: { entry: "server" },
+    },
+  })(env);
+};
