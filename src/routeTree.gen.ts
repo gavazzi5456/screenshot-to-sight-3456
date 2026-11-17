@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ColecoesRouteImport } from './routes/colecoes'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ExpositoresRouteImport } from './routes/expositores'
+import { Route as MarcasRouteImport } from './routes/marcas'
+import { Route as NossaCasaRouteImport } from './routes/nossa-casa'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColecoesRoute = ColecoesRouteImport.update({
+  id: '/colecoes',
+  path: '/colecoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExpositoresRoute = ExpositoresRouteImport.update({
+  id: '/expositores',
+  path: '/expositores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarcasRoute = MarcasRouteImport.update({
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NossaCasaRoute = NossaCasaRouteImport.update({
+  id: '/nossa-casa',
+  path: '/nossa-casa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/colecoes': typeof ColecoesRoute
+  '/contato': typeof ContatoRoute
+  '/expositores': typeof ExpositoresRoute
+  '/marcas': typeof MarcasRoute
+  '/nossa-casa': typeof NossaCasaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/colecoes': typeof ColecoesRoute
+  '/contato': typeof ContatoRoute
+  '/expositores': typeof ExpositoresRoute
+  '/marcas': typeof MarcasRoute
+  '/nossa-casa': typeof NossaCasaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/colecoes': typeof ColecoesRoute
+  '/contato': typeof ContatoRoute
+  '/expositores': typeof ExpositoresRoute
+  '/marcas': typeof MarcasRoute
+  '/nossa-casa': typeof NossaCasaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/colecoes' | '/contato' | '/expositores' | '/marcas' | '/nossa-casa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/colecoes' | '/contato' | '/expositores' | '/marcas' | '/nossa-casa'
+  id:
+    | '__root__'
+    | '/'
+    | '/colecoes'
+    | '/contato'
+    | '/expositores'
+    | '/marcas'
+    | '/nossa-casa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ColecoesRoute: typeof ColecoesRoute
+  ContatoRoute: typeof ContatoRoute
+  ExpositoresRoute: typeof ExpositoresRoute
+  MarcasRoute: typeof MarcasRoute
+  NossaCasaRoute: typeof NossaCasaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colecoes': {
+      id: '/colecoes'
+      path: '/colecoes'
+      fullPath: '/colecoes'
+      preLoaderRoute: typeof ColecoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/expositores': {
+      id: '/expositores'
+      path: '/expositores'
+      fullPath: '/expositores'
+      preLoaderRoute: typeof ExpositoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marcas': {
+      id: '/marcas'
+      path: '/marcas'
+      fullPath: '/marcas'
+      preLoaderRoute: typeof MarcasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nossa-casa': {
+      id: '/nossa-casa'
+      path: '/nossa-casa'
+      fullPath: '/nossa-casa'
+      preLoaderRoute: typeof NossaCasaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ColecoesRoute: ColecoesRoute,
+  ContatoRoute: ContatoRoute,
+  ExpositoresRoute: ExpositoresRoute,
+  MarcasRoute: MarcasRoute,
+  NossaCasaRoute: NossaCasaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

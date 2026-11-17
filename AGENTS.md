@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application conventions
+- Use independent TanStack leaf routes with a shared editorial shell for public content so navigation and metadata remain distinct.
+- Keep this prototype browser-only: catalog data is static and favorites are session-scoped React context; commercial inquiries generate text without submitting or sending.
+- All illustrated media is labeled and separated from product references so editorial imagery cannot imply verified inventory.
